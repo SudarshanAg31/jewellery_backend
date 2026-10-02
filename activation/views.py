@@ -33,7 +33,7 @@ def request_access(request):
     }, status=http_status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'HEAD'])
 def check_status(request):
     device_id = request.query_params.get('device_id')
     if not device_id:
@@ -45,7 +45,6 @@ def check_status(request):
         return Response({'error': 'Device not found'}, status=http_status.HTTP_404_NOT_FOUND)
 
     return Response(DeviceStatusSerializer(device).data, status=http_status.HTTP_200_OK)
-
 
 @api_view(['POST'])
 def mark_activated(request):
